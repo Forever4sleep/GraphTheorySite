@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Theory - Basics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+
+    <style>
+        /* Custom Prism.js styles */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: slategray;
+        }
+        .token.punctuation {
+            color: #999;
+        }
+        .token.namespace {
+            opacity: .7;
+        }
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #905;
+        }
+        .token.boolean,
+        .token.number {
+            color: #905;
+        }
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #690;
+        }
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string {
+            color: #a67f59;
+            background: rgba(255, 255, 255, .5);
+        }
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+            color: #07a;
+        }
+        .token.function {
+            color: #DD4A68;
+        }
+        .token.regex,
+        .token.important,
+        .token.variable {
+            color: #e90;
+        }
+        .token.important,
+        .token.bold {
+            font-weight: bold;
+        }
+        .token.italic {
+            font-style: italic;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+            animation: fadeIn 0.5s ease-in-out; /* Animation for fade-in effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        h3:hover {
+            color: #007bff;
+        }
+        .content {
+            display: none;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        ol {
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <h3>2.1 Основные понятия теории графов</h3>
+        <p>В этом разделе рассматриваются ключевые аспекты теории графов, представляющие фундаментальные понятия для понимания структуры графов и их остовных деревьев.</p>
+        
+    <h3 onclick="toggleContent('graph')">2.1.1 Графы и их составляющие</h3>
+        <div id="graph" class="content">
+            <p>Граф – абстрактная математическую структура, состоящая из вершин и рёбер, определяющих связи между вершинами.</p>
+            <p>Формально он определяется вот так: есть совокупность двух множеств – непустого множества V и множества E неупорядоченных пар различных элементов множества. V – множество вершин, E – множество ребер.</p>
+            <p>Терминология в теории графов не является унифицированной, и в различных источниках могут применяться разные термины.</p>
+            <p><strong>Вершина (узел, точка) графа G:</strong> элемент множества вершин V(G), обозначаемый v.</p>
+            <p><strong>Ребро (линия) графа G:</strong> элемент множества ребер E(G), обозначаемый e, или пара вершин {v1, v2}, где v1, v2 принадлежат множеству вершин V(G).</p>
+            <p><strong>Элементы графа G:</strong> вершины v ∈ V(G) и ребра e ∈ E(G).</p>
+    </div>
+        
+        <h3 onclick="toggleContent('spanning')">2.1.2 Остовные деревья</h3>
+        <div id="spanning" class="content">
+        <p>Для того, чтобы рассказать про этот вид графов, нужно сначала ввести некоторые определения, на которые мы будем опираться.</p>
+        <p><strong>Цикл</strong> – путь, в котором начальная и конечная вершины совпадают. Длиной цикла называется число ребер в этом цикле.</p>
+        <p><strong>Ациклический граф</strong> – граф, в котором нет циклов.</p>
+        <p><strong>Путь</strong> – последовательность вершин, в которой каждая вершина соединена со следующей ребром.</p>
+        <p><strong>Связный граф</strong> – граф, в котором между любой парой вершин этого графа существует как минимум один путь.</p>
+        <p>Итак, мы готовы дать определение остовного дерева.</p>
+        <p><strong>Остовное дерево</strong> (англ. spanning tree) графа G = (V, E) – ациклический связный подграф данного связного неориентированного графа, в который входят все его вершины.</p>
+        <!-- Content omitted for brevity -->
+    </div>
+        <h3 onclick="toggleContent('dfs')">2.2 Метод обхода в глубину (DFS)</h3>
+        <div id="dfs" class="content">
+        <p>Обход в глубину (поиск в глубину, англ. Depth-First Search, DFS) — один из основных методов обхода графа, часто используемый для проверки связности, поиска цикла и компонент сильной связности и для топологической сортировки.</p>
+        <p>Общая идея алгоритма состоит в следующем: для каждой не пройденной вершины необходимо найти все не пройденные смежные вершины и повторить поиск для них:</p>
+        <ol>
+            <li>Выбираем любую вершину из еще не пройденных, обозначим ее как u</li>
+            <li>Запускаем процедуру dfs(u)</li>
+            <li>Помечаем вершину u как пройденную</li>
+            <li>Для каждой не пройденной смежной с u вершиной (назовем ее v) запускаем dfs(v)</li>
+        </ol>
+        <p>Повторяем шаги 1 и 2, пока все вершины не окажутся пройденными.</p>
+        <p><strong>Асимптотика:</strong> оценим время работы обхода в глубину. Процедура dfs вызывается от каждой вершины не более одного раза, а внутри процедуры рассматриваются все такие ребра {e | begin( e ) = u}. Всего таких ребер для всех вершин в графе O(E), следовательно, время работы алгоритма оценивается как O(V+E).</p>
+    </div>
+        <h3 onclick="toggleContent('application')">2.2.2 Применение для нахождения остовных деревьев</h3>
+        <div id="application" class="content">
+        <p>Остовное дерево может быть построено практически любым алгоритмом обхода графа, например поиском в глубину или поиском в ширину. Оно состоит из всех пар рёбер (u, v) таких что алгоритм, просматривая вершину u, обнаруживает в её списке смежности новую, не обнаруженную ранее вершину v.</p>
+    </div>
+        <h3 onclick="toggleContent('bfs')">2.3 Метод обхода в ширину (BFS)</h3>
+        <div id="bfs" class="content">
+        <p>Поиск в ширину (BFS) – это метод обхода графа, который позволяет найти все вершины, достижимые из заданной исходной вершины, а также вычислить расстояние от исходной вершины до каждой достижимой вершины. Алгоритм работает как для ориентированных, так и для неориентированных графов. Он начинает обход с корня графа и посещает все вершины на текущем уровне глубины, прежде чем перейти к вершинам на следующем уровне глубины. Для того, чтобы избежать повторного посещения вершин, BFS использует очередь. Алгоритм BFS особенно полезен для нахождения кратчайшего пути в невзвешенном графе.</p>
+        <ol>
+            <li>Поместить узел, с которого начинается поиск, в изначально пустую очередь.</li>
+            <li>Извлечь из начала очереди узел  u  и пометить его как развёрнутый.</li>
+            <ol type="a">
+                <li>Если узел u является целевым узлом, то завершить поиск с результатом «успех».</li>
+                <li>В противном случае, в конец очереди добавляются все преемники узла u, которые ещё не развёрнуты и не находятся в очереди.</li>
+            </ol>
+            <li>Если очередь пуста, то все узлы связного графа были просмотрены, следовательно, целевой узел недостижим из начального; завершить поиск с результатом «неудача».</li>
+            <li>Вернуться к п.2</li>
+        </ol>
+        <p><strong>Асимптотика:</strong> так как в худшем случае алгоритм посещает все узлы графа, при хранении графа в виде списков смежности, временная сложность алгоритма составляет O(|V| + |E|).</p>
+    </div>
+        <h3 onclick="toggleContent('applic')">2.3.2 Применение для нахождения остовных деревьев</h3>
+        <div id="applic" class="content">
+        <p>Остовное дерево может быть построено практически любым алгоритмом обхода графа, например поиском в глубину или поиском в ширину. Оно состоит из всех пар рёбер (u, v) таких что алгоритм, просматривая вершину u, обнаруживает в её списке смежности новую, не обнаруженную ранее вершину v.</p>
+    </div>
+    <div>
+        <h3 onclick="toggleContent('dfs-impl')">Реализация DFS на Python</h3>
+        <div id="dfs-impl" class = "content">
+        <img src="/templates/img.jpg" alt="something"/>
+        <pre>
+        <code class="language-python">
+from collections import defaultdict
+class Graph:
+    def __init__(self):
+
+        self.graph = defaultdict(list)
+    
+    def addEdge(self, u, v):
+        self.graph[u].append(v)
+    
+    def DFSUtil(self, v, visited):
+        visited.add(v)
+        print(v, end=' ')
+
+        for neighbour in self.graph[v]:
+            if neighbour not in visited:
+                self.DFSUtil(neighbour, visited)
+    
+    def DFS(self, v):
+        visited = set()
+        self.DFSUtil(v, visited)
+
+
+if __name__ == "__main__":
+    g = Graph()
+    g.addEdge(0, 1)
+    g.addEdge(0, 2)
+    g.addEdge(1, 2)
+    g.addEdge(2, 0)
+    g.addEdge(2, 3)
+    g.addEdge(3, 3)
+
+    g.DFS(2)
+        </code>
+    </pre>
+</div>
+        <div id="dfs-impl" class="content">
+            <a href="https://www.geeksforgeeks.org/python-program-for-depth-first-search-or-dfs-for-a-graph/">Ссылка</link>
+        </div>
+    </div>
+        <!-- Other content about BFS omitted for brevity -->
+    </div>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

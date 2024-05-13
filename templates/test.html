@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Theory Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Animation for fade-in effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-in-out; /* Animation for slide-in effect */
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+        .question {
+            margin-bottom: 40px;
+            display: none; /* Hide all questions by default */
+        }
+        .question.active {
+            display: block; /* Display the active question */
+            animation: fadeIn 0.5s ease-in-out; /* Animation for fade-in effect */
+        }
+        .question p {
+            font-weight: bold; /* Make the question text bold */
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column; /* Align options vertically */
+            align-items: center; /* Center options horizontally */
+        }
+        input[type="radio"] {
+            display: none; /* Hide the default radio buttons */
+        }
+        label {
+            display: block; /* Display each option on a new line */
+            margin-bottom: 10px; /* Add some space between options */
+            padding: 8px 16px;
+            background-color: #007bff; /* Blue background color */
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+        label:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        input[type="radio"]:checked + label {
+            background-color: #28a745; /* Green background color for selected option */
+        }
+        input[type="submit"] {
+            padding: 12px 24px;
+            background-color: #17a2b8; /* Turquoise background color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+        input[type="submit"]:hover {
+            background-color: #138496; /* Darker turquoise on hover */
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between; /* Distribute space evenly between buttons */
+            animation: slideInUp 0.5s ease-in-out; /* Animation for slide-in effect */
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(50px); }
+            to { transform: translateY(0); }
+        }
+        .next-button {
+            padding: 10px 20px;
+            background-color: #dc3545; /* Red background color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+        .prev-button {
+            padding: 10px 20px;
+            background-color: #dc3545; /* Red background color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: none;
+            transition: background-color 0.3s ease;
+        }
+        .next-button:hover, .prev-button:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ name }}!</h1>
+        <form id="test-form" action="/result" method="POST">
+            {% for question in questions %}
+            <div class="question {% if loop.index == 1 %}active{% endif %}" id="question{{ loop.index }}">
+                <p>{{ question[1] }}</p>
+                <div class="options">
+                    <input type="radio" id="option1{{ loop.index }}" name="answer{{ loop.index }}" value="0">
+                    <label for="option1{{ loop.index }}">{{ question[2][0] }}</label>
+                    <input type="radio" id="option2{{ loop.index }}" name="answer{{ loop.index }}" value="1">
+                    <label for="option2{{ loop.index }}">{{ question[2][1] }}</label>
+                    <input type="radio" id="option3{{ loop.index }}" name="answer{{ loop.index }}" value="2">
+                    <label for="option3{{ loop.index }}">{{ question[2][2] }}</label>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="button-container">
+                <button class="prev-button" type="button" onclick="prevQuestion()">Previous Question</button>
+                <button class="next-button" type="button" onclick="nextQuestion()">Next Question</button>
+            </div>
+            <input id="submit-button" type="submit" value="Submit" style="display: none;">
+        </form>
+    </div>
+
+    <script>
+        var currentQuestion = 1;
+        var totalQuestions = {{ questions|length }};
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                document.getElementById("question" + currentQuestion).classList.remove("active");
+                currentQuestion++;
+                document.getElementById("question" + currentQuestion).classList.add("active");
+                updateButtons();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                document.getElementById("question" + currentQuestion).classList.remove("active");
+                currentQuestion--;
+                document.getElementById("question" + currentQuestion).classList.add("active");
+                updateButtons();
+            }
+        }
+
+        function updateButtons() {
+            if (currentQuestion === 1) {
+                document.querySelector(".prev-button").style.display = "none";
+            } else {
+                document.querySelector(".prev-button").style.display = "inline-block";
+            }
+
+            if (currentQuestion === totalQuestions) {
+                document.querySelector(".next-button").style.display = "none";
+                document.getElementById("submit-button").style.display = "inline-block";
+            } else {
+                document.querySelector(".next-button").style.display = "inline-block";
+                document.getElementById("submit-button").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+

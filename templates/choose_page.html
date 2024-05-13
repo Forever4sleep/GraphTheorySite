@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выберете сложность теста</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Animation for fade-in effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-in-out; /* Animation for slide-in effect */
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+        .test-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Gap between buttons */
+            margin-top: 20px;
+        }
+        .test-option-form {
+            display: inline-block; /* Ensure forms are displayed horizontally */
+        }
+        .test-option-button {
+            padding: 12px 24px;
+            background-color: #007bff; /* Blue background color for buttons */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+        .test-option-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Выберите сложность теста, {{name}}</h1>
+        <div class="test-options">
+            <form class="test-option-form" action="/test_easy" method="POST">
+                <input type="hidden" name="difficulty" value="easy">
+                <button class="test-option-button" type="submit">Easy Test</button>
+            </form>
+            <form class="test-option-form" action="/test_medium" method="POST">
+                <input type="hidden" name="difficulty" value="medium">
+                <button class="test-option-button" type="submit">Medium Test</button>
+            </form>
+            <form class="test-option-form" action="/test_hard" method="POST">
+                <input type="hidden" name="difficulty" value="hard">
+                <button class="test-option-button" type="submit">Hard Test</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

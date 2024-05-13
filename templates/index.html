@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Theory Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out; /* Animation for fade-in effect */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            animation: slideInDown 0.5s ease-in-out; /* Animation for slide-in effect */
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); }
+            to { transform: translateY(0); }
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease; /* Transition for input border color */
+        }
+        input[type="text"]:focus {
+            border-color: #007bff; /* Blue border color on focus */
+            outline: none;
+        }
+        input[type="submit"] {
+            padding: 12px 24px;
+            background-color: #17a2b8; /* Turquoise background color */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+        input[type="submit"]:hover {
+            background-color: #138496; /* Darker turquoise on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Graph Theory Test!</h1>
+        <form action="/choose" method="POST">
+            <input type="text" name="name" placeholder="Введите свое имя" required>
+            <br>
+            <input type="submit" value="Start Test">
+        </form>
+    </div>
+</body>
+</html>
